@@ -1,0 +1,55 @@
+/*-------------------------------------------------------------------
+*  guessnum.cpp   -  guess the number
+*  hack16   2/22/19
+-------------------------------------------------------------------*/
+#include <cstdio>
+#include <cstdlib>
+#include <iostream>
+#include <ctime>
+
+using namespace std;
+
+int main()
+{
+	srand(time(NULL));              // "seed" the randomizer
+	int limit = 1001;               // set a range limit
+	int secret = rand() % limit;    // % is the "remainder" operator
+	int max_tries = 10;             // the challenge
+	int guess;
+	int trial = 0;					// count the guesses here
+	int hint = 0;
+
+	do
+	{
+		trial = trial + 1;
+
+		if (trial > max_tries)
+		{
+			cout << "Too many guesses: you lose.\n";
+			return -1;
+		}
+		cout << "Guess: ";
+		cin >> guess;
+
+		if (guess < secret)
+		{
+			cout << "Too Low" << endl
+				<< "Hint: it is in the range of "
+				<< secret - 20 << " and " << secret + 20 << endl;
+		}
+		else if (guess > secret)
+		{
+			cout << "Too High" << endl
+				<< "Hint: it is in the range of "
+				<< secret - 20 << " and " << secret + 20 << endl;
+		}
+		else
+			cout << "RIGHT!!\n";
+
+	} while (guess != secret);
+	              
+
+	cout << "Number of tries: " << trial << endl;
+	cin.get();
+	return 0; 
+} 
